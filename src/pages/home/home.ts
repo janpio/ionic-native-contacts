@@ -28,7 +28,11 @@ export class HomePage {
               console.log(contacts[i].photos);
               contact["image"] = this.sanitizer.bypassSecurityTrustUrl(contacts[i].photos[0].value);
               console.log(contact);
+            } else {
+              contact["image"] = "assets/dummy-profile-pic.png";
+
             }
+            this.contactList.push(contact);
           }
         }
     });
