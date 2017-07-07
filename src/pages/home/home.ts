@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { DomSanitizer } from '@angular/platform-browser';
 import { Contacts } from '@ionic-native/contacts';
 
 @Component({
@@ -7,7 +8,7 @@ import { Contacts } from '@ionic-native/contacts';
 })
 export class HomePage {
 
-  constructor(private contacts: Contacts) {
+  constructor(private contacts: Contacts, private sanitizer: DomSanitizer) {
 
   }
 
@@ -25,9 +26,8 @@ export class HomePage {
             contact["number"] = contacts[i].phoneNumbers[0].value;
             if(contacts[i].photos != null) {
               console.log(contacts[i].photos);
-              contact["image"]  = contacts[i].photos[0].value;
+              contact["image"] = this.sanitizer.bypassSecurityTrustUrl(contacts[i].photos[0].value);
               console.log(contact);
-              this.contactList.push(contact);
             }
           }
         }

@@ -16,7 +16,7 @@
   <ion-list>
     <ion-item *ngFor="let contact of contactList">
       <ion-avatar *ngIf="contact.image" item-start>
-        <img src="{{contact.image}}">
+        <img [src]="contact.image">
       </ion-avatar>
       {{contact.name}}
       <p>{{contact.number}}</p>
