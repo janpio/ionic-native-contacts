@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController } from 'ionic-angular';
+import { Contacts } from '@ionic-native/contacts';
 
 @Component({
   selector: 'page-home',
@@ -7,8 +7,17 @@ import { NavController } from 'ionic-angular';
 })
 export class HomePage {
 
-  constructor(public navCtrl: NavController) {
+  constructor(private contacts: Contacts) {
 
+  }
+
+  getContacts(): void {
+    this.contacts.find(
+      ["displayName", "phoneNumbers","photos"],
+      {multiple: true, hasPhoneNumber: true}
+      ).then((contacts) => {
+        console.log(contacts);
+    });
   }
 
 }
