@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { DomSanitizer } from '@angular/platform-browser';
-import { Contacts } from '@ionic-native/contacts';
+import { Contact, ContactField, ContactName, Contacts } from '@ionic-native/contacts';
 
 @Component({
   selector: 'page-home',
@@ -30,12 +30,22 @@ export class HomePage {
               console.log(contact);
             } else {
               contact["image"] = "assets/dummy-profile-pic.png";
-
             }
             this.contactList.push(contact);
           }
         }
     });
+  }
+
+  addContact(): void {
+    let contact: Contact = this.contacts.create();
+    contact.name = new ContactName(null, 'Smith', 'John');
+    let number = new ContactField('mobile', '6471234567');
+    contact.phoneNumbers = [number];
+    contact.save().then(
+      () => console.log('Contact saved!', contact),
+      (error: any) => console.error('Error saving contact.', error)
+    );
   }
 
 }
